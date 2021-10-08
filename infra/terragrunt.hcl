@@ -1,7 +1,12 @@
 terraform {
-  # deploy using development branch
-  # source = "git@github.com:hernanku/infra-devops.git//terraform/aws/sample-vpc?ref=develop"
   source = "/Users/admin/dev-pjcts/infra-devops/terraform/aws//sample-vpc"
+}
+
+remote_state {
+  backend = "local"
+  config = {
+    path = "${get_terragrunt_dir()}/terraform.tfstate"
+  }
 }
 
 inputs = {

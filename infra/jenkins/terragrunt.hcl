@@ -4,6 +4,14 @@ terraform {
   source = "/Users/admin/dev-pjcts/infra-devops/terraform/aws//sample-ec2"
 }
 
+remote_state {
+  backend = "local"
+  config = {
+    path = "${get_terragrunt_dir()}/terraform.tfstate"
+  }
+}
+
+
 inputs = {
   aws_region            = "us-east-1"
   environment           = "dev"
