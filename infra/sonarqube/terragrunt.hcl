@@ -20,7 +20,7 @@ inputs = {
   aws_region        = "us-east-1"
   environment       = "dev"
   project_name      = "devops"
-  application_name  = "jenkins"
+  application_name  = "sonarqube"
   subnet_filter_tag = "public"
   asg_instance_type = "t3.micro"
   health_check_type = "EC2"
@@ -32,16 +32,6 @@ inputs = {
   asg_block_device_mappings = [
     {
       device_name = "/dev/xvda"
-      no_device   = 0
-      ebs = {
-        delete_on_termination = true
-        encrypted             = true
-        volume_size           = 20
-        volume_type           = "gp2"
-      }
-    },
-    {
-      device_name = "/dev/sda1"
       no_device   = 0
       ebs = {
         delete_on_termination = true
