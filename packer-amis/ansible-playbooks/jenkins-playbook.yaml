@@ -1,0 +1,36 @@
+---
+- hosts: default
+  become: true
+
+  
+  vars:
+    jenkins_hostname: localhost
+    jenkins_prefer_lts: true
+    jenkins_package_state: present
+    jenkins_connection_retries: 60
+    jenkins_home: /var/lib/jenkins
+    jenkins_http_port: 8080
+    jenkins_jar_location: /opt/jenkins-cli.jar
+    jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
+
+    jenkins_plugin_updates_expiration: 86400
+    jenkins_plugin_timeout: 30
+    jenkins_plugins_install_dependencies: true
+
+    jenkins_process_user: jenkins
+    jenkins_admin_username: admin
+    jenkins_admin_password: admin
+    jenkins_admin_password_file: "adminPass123"
+
+    jenkins_plugins_state: present
+    jenkins_plugins:
+      - name: blueocean
+      - name: influxdb
+        version: "1.12.1"
+    java_packages:
+      - openjdk-8-jdk
+
+  roles:
+    - role: geerlingguy.java
+    - role: geerlingguy.jenkins
+
