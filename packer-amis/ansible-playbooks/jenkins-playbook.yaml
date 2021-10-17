@@ -27,8 +27,9 @@
       - name: blueocean
       - name: influxdb
         version: "1.12.1"
+        
     java_packages:
-      - openjdk-8-jdk
+      - java-1.8.0-openjdk
 
   roles:
     - role: geerlingguy.java

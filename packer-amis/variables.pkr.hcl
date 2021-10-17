@@ -1,6 +1,5 @@
 variable "skip_create_ami" {
-  type    = bool
-  default = false
+  type = bool
 }
 
 variable "aws_region" {

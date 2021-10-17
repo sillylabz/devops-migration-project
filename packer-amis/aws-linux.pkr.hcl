@@ -1,5 +1,5 @@
 source "amazon-ebs" "golden-ami" {
-  # skip_create_ami  = true
+  skip_create_ami       = var.skip_create_ami
   vpc_id                = ""
   region                = var.aws_region
   force_deregister      = true
@@ -8,19 +8,19 @@ source "amazon-ebs" "golden-ami" {
   # iam_instance_profile      = "AmazonSSMRoleForInstancesQuickSetup"
   instance_type             = var.packer_instance_type
   source_ami                = var.packer_source_ami
-  ssh_username = var.packer_ssh_username
+  ssh_username              = var.packer_ssh_username
   communicator              = "ssh"
   ssh_clear_authorized_keys = true
   ssh_interface             = "public_ip"
-  ssh_timeout = "3m"
+  ssh_timeout               = "2m"
 
   launch_block_device_mappings {
     delete_on_termination = true
     device_name           = "/dev/sda1"
     volume_size           = 20
     volume_type           = "gp2"
-    encrypted             = true
-    kms_key_id            = var.packer_kms_key_id
+    encrypted             = false
+    # kms_key_id            = var.packer_kms_key_id
   }
   run_tags        = var.tags
   run_volume_tags = var.tags

@@ -3,7 +3,7 @@ init:
 	terragrunt run-all --terragrunt-non-interactive init 
 
 create-all:
-	terragrunt run-all --terragrunt-non-interactive apply 
+	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir 
 
 create-vpc:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir vpc
