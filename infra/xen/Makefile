@@ -5,9 +5,6 @@ init-all:
 create-all:
 	terragrunt run-all --terragrunt-non-interactive apply 
 
-create-vpc:
-	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir vpc
-
 create-jenkins:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir jenkins
 
@@ -26,10 +23,10 @@ create-sensu:
 
 # delete
 delete-jenkins:
-	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir jenkins --terragrunt-exclude-dir vpc
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir jenkins 
 
 delete-sonarqube:
-	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir sonarqube --terragrunt-exclude-dir vpc
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir sonarqube 
 
 delete-nexus-repo:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir nexus-repo
