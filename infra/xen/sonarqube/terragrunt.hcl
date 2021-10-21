@@ -1,7 +1,7 @@
 terraform {
   # deploy using development branch
-  # source = "git@github.com:hernanku/infra-devops.git//terraform/aws/sample-ec2?ref=develop"
-  source = "/Users/admin/dev-pjcts/packer-scripts/xenserver//terraform-vm"
+  source = "git@github.com:hernanku/infra-devops.git//terraform/xenorchestra/terraform-vm?ref=develop"
+  // source = "/Users/admin/dev-pjcts/packer-scripts/xenserver//terraform-vm"
 }
 
 remote_state {
