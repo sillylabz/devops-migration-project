@@ -4,10 +4,6 @@
   become: yes
 
   tasks:
-    - name: Test connection to Jenkins host
-      shell: ping -c 1 -w 2 {{ ansible_host }}
-      ignore_errors: true
-
     - name: Install java jdk 11 on Centos 8
       dnf:
         name: java-11-openjdk-devel.x86_64

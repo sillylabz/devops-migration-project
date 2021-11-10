@@ -1,0 +1,50 @@
+---
+- name: Install nexus repo on Centos
+  hosts: nexus-repo
+  become: yes
+
+  pre_tasks:
+    - name: Install package dependencies.
+      package:
+        name: "{{ item }}"
+        state: "present"
+      with_items:
+        - unzip
+        - rsync
+
+  post_tasks:
+    - name: Allow nexus repo service through firewall
+      firewalld:
+        port: "8081/tcp"
+        permanent: yes
+        state: enabled
+    #   become: yes
+    - name: reload firewalld service
+      systemd:
+        name: firewalld
+        state: reloaded
+
+  roles:
+    - role: geerlingguy.java
+      java_packages:
+        - java-1.8.0-openjdk
+
+    - role: geerlingguy.apache
+      vars:
+        apache_create_vhosts: no
+        apache_remove_default_vhost: true
+        tags: geerlingguy.apache
+
+    - role: ansible-thoteam.nexus3-oss
+      vars:
+        nexus_timezone: "US/Eastern"
+        nexus_admin_password: "admin123"
+        nexus_application_host: 0.0.0.0
+        nexus_default_port: 8081
+        nexus_os_group: 'nexus'
+        nexus_os_user: 'nexus'
+        nexus_public_hostname: "nexus-repo.labz.io"
+        nexus_min_heap_size: "1200M"
+        nexus_max_heap_size: "2000M"
+        nexus_max_direct_memory: "2G"
+      tags: ansible-thoteam.nexus3-oss

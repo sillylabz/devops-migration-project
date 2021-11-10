@@ -17,6 +17,10 @@ init-splunk:
 init-sensu:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir sensu
 
+init-postgres:
+	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir postgres
+
+
 
 # plan
 plan-all:
@@ -37,11 +41,11 @@ plan-splunk:
 plan-sensu:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir sensu
 
+plan-postgres:
+	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir postgres
+
 
 # create
-init-all:
-	terragrunt run-all --terragrunt-non-interactive init 
-
 create-all:
 	terragrunt run-all --terragrunt-non-interactive apply 
 
@@ -59,6 +63,9 @@ create-splunk:
 
 create-sensu:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir sensu
+
+create-postgres:
+	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir postgres
 
 
 # delete
@@ -80,6 +87,9 @@ delete-sensu:
 delete-all:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-ignore-dependency-errors
 
+delete-postgres:
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir postgres
+
 
 # format
 format-all:
@@ -100,23 +110,33 @@ format-splunk:
 format-sensu:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir sensu
 
+format-postgres:
+	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir postgres
+
+
+
 
 # validate
 validate-all:
-	terragrunt run-all --terragrunt-non-interactive fmt 
+	terragrunt run-all --terragrunt-non-interactive validate 
 
 validate-jenkins:
-	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir jenkins
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir jenkins
 
 validate-sonarqube:
-	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir sonarqube
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir sonarqube
 
 validate-nexus-repo:
-	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir nexus-repo
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir nexus-repo
 
 validate-splunk:
-	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir splunk
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir splunk
 
 validate-sensu:
-	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir sensu
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir sensu
+
+validate-postgres:
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir postgres
+
+
 
