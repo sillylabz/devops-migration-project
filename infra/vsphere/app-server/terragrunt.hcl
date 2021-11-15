@@ -2,6 +2,7 @@ terraform {
   # deploy using development branch
   // source = "git@github.com:hernanku/infra-devops.git//terraform/xenorchestra/terraform-vm?ref=develop"
   source = "/home/amin/dev-projects/infra-devops/terraform/vmware/vsphere//single-vm"
+
 }
 
 remote_state {
@@ -13,6 +14,7 @@ remote_state {
 
 inputs = {
   vsphere_server_url = "10.0.0.25"
+  vault_address      = "http://10.0.0.29:8200"
   vsphere_user       = "administrator@vsphere.local"
   vsphere_password   = ""
   vsphere_datacenter = "Datacenter"
