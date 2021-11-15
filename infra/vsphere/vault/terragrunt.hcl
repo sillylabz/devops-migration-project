@@ -14,7 +14,7 @@ remote_state {
 inputs = {
   vsphere_server_url = "10.0.0.25"
   vsphere_user       = "administrator@vsphere.local"
-  vsphere_password   = "PrankWe66!"
+  vsphere_password   = ""
   vsphere_datacenter = "Datacenter"
   vsphere_cluster    = "Cluster"
   vm_datastore       = "vmData1"
