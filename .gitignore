@@ -6,7 +6,7 @@
 **/.terraform
 **/.vscode
 **/*.tfstate
-**/*.tfstate.backup
+**/*.tfstate.*
 **/*.out
 **/.terragrunt-cache
 **/.bundle

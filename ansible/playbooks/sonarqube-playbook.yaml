@@ -1,0 +1,45 @@
+---
+- name: Install sonarqube on Centos
+  hosts: sonarqube
+  become: yes
+
+  post_tasks:
+    - name: Allow sonarqube service through firewall
+      firewalld:
+        port: "9000/tcp"
+        permanent: yes
+        state: enabled
+    - name: reload firewalld service
+      systemd:
+        name: firewalld
+        state: reloaded
+
+  roles:
+    - role: geerlingguy.java
+      vars: 
+          java_packages: 
+            - java-11-openjdk
+        
+    - role: lrk.sonarqube
+      vars:
+        sonar_ce_java_opts: "-Xmx512m -Xms128m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true"
+        sonar_db_embedded: true
+        sonar_db_embedded_port: 9092
+        # sonar_db_user: "sonar"
+        # sonar_db_pass: "sonar"
+        # sonar_jdbc_url: "jdbc:postgresql://localhost/sonar"
+        sonar_jdbc_maxactive: 60
+        sonar_jdbc_maxidle: 5
+        sonar_jdbc_minidle: 2
+        sonar_jdbc_maxwait: 5000
+        sonar_jdbc_min_evictable_idle_time_millis: 600000
+        sonar_jdbc_time_between_eviction_runs_millis: 30000
+        sonar_group: sonar
+        sonar_user: sonar
+        sonar_limitnofile: 65536
+        sonar_web_host: 0.0.0.0
+        sonar_web_port: 9000
+        sonar_web_access_logs_enable: true
+        sonar_web_access_logs_pattern: "%i{X-Forwarded-For} %l %u [%t] \"%r\" %s %b \"%i{Referer}\" \"%i{User-Agent}\""
+
+
