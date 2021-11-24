@@ -1,7 +1,7 @@
 terraform {
   # deploy using development branch
   // source = "git@github.com:hernanku/infra-devops.git//terraform/xenorchestra/terraform-vm?ref=develop"
-  source = "/home/amin/dev-projects/infra-devops/terraform/vmware/vsphere//single-vm"
+  source = "/Users/admin/dev-projects/infra-devops/terraform/vmware/vsphere//single-vm"
 }
 
 remote_state {
@@ -15,8 +15,8 @@ inputs = {
   vsphere_server_url = "10.0.0.25"
   vsphere_user       = "administrator@vsphere.local"
   vsphere_password   = ""
-  vsphere_datacenter = "Datacenter"
-  vsphere_cluster    = "Cluster"
+  vsphere_datacenter = "dc-east"
+  vsphere_cluster    = "lab-cluster"
   vm_datastore       = "vmData1"
   vm_name            = "sonarqube"
   // vm_count = 1

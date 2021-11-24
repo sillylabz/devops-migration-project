@@ -5,7 +5,7 @@
 ansible_connection=ssh
 ansible_user=root
 ansible_password=root123
-host_key_checking=true
+host_key_checking=False
 
 
 [nexus-repo]
@@ -15,7 +15,7 @@ host_key_checking=true
 ansible_connection=ssh
 ansible_user=root
 ansible_password=root123
-host_key_checking=true
+host_key_checking=False
 
 
 [sonarqube]
@@ -25,7 +25,7 @@ host_key_checking=true
 ansible_connection=ssh
 ansible_user=root
 ansible_password=root123
-host_key_checking=true
+host_key_checking=False
 
 
 [sonarqubedb]
@@ -35,5 +35,14 @@ host_key_checking=true
 ansible_connection=ssh
 ansible_user=root
 ansible_password=root123
-host_key_checking=true
+host_key_checking=False
+
+
+[mongodb]
+10.0.0.57
+[mongodb:vars]
+ansible_connection=ssh
+ansible_user=root
+ansible_password=root123
+host_key_checking=False
 
