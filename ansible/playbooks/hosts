@@ -3,9 +3,10 @@
 
 [jenkins:vars]
 ansible_connection=ssh
-ansible_user=root
-ansible_password=root123
+ansible_user=devops
+ansible_password=devops123
 host_key_checking=False
+
 
 
 [nexus-repo]
@@ -13,9 +14,10 @@ host_key_checking=False
 
 [nexus-repo:vars]
 ansible_connection=ssh
-ansible_user=root
-ansible_password=root123
+ansible_user=devops
+ansible_password=devops123
 host_key_checking=False
+
 
 
 [sonarqube]
@@ -23,9 +25,10 @@ host_key_checking=False
 
 [sonarqube:vars]
 ansible_connection=ssh
-ansible_user=root
-ansible_password=root123
+ansible_user=devops
+ansible_password=devops123
 host_key_checking=False
+
 
 
 [sonarqubedb]
@@ -33,16 +36,39 @@ host_key_checking=False
 
 [sonarqubedb:vars]
 ansible_connection=ssh
-ansible_user=root
-ansible_password=root123
+ansible_user=devops
+ansible_password=devops123
 host_key_checking=False
+
 
 
 [mongodb]
 10.0.0.57
 [mongodb:vars]
 ansible_connection=ssh
-ansible_user=root
-ansible_password=root123
+ansible_user=devops
+ansible_password=devops123
+host_key_checking=False
+
+
+
+[gitlab]
+10.0.0.61
+
+[gitlab:vars]
+ansible_connection=ssh
+ansible_user=devops
+ansible_password=devops123
+host_key_checking=False
+
+
+
+[gitlab-runner]
+10.0.0.62
+
+[gitlab-runner:vars]
+ansible_connection=ssh
+ansible_user=devops
+ansible_password=devops123
 host_key_checking=False
 

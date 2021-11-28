@@ -34,6 +34,12 @@ init-vault:
 init-dhcp:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir isc-dhcp-server
 
+init-gitlab:
+	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir gitlab
+
+init-gitlab-runner:
+	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir gitlab-runner
+
 
 # plan
 plan-all:
@@ -68,6 +74,12 @@ plan-vault:
 
 plan-dhcp:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
+
+plan-gitlab:
+	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir gitlab -var 'vsphere_password=$(vsphere_password)'
+
+plan-gitlab-runner:
+	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
 
 
 
@@ -105,6 +117,12 @@ create-vault:
 create-dhcp:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
 
+create-gitlab:
+	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir gitlab -var 'vsphere_password=$(vsphere_password)'
+
+create-gitlab-runner:
+	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
+
 
 # delete
 delete-all:
@@ -138,7 +156,13 @@ delete-vault:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir vault -var 'vsphere_password=$(vsphere_password)'
 
 delete-dhcp:
-	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir isc-dhcp-server -var 'dhcp_vsphere_password=$(vsphere_password)'
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
+
+delete-gitlab:
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir gitlab -var 'vsphere_password=$(vsphere_password)'
+
+delete-gitlab-runner:
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
 
 
 # format
@@ -175,6 +199,12 @@ format-vault:
 format-dhcp:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir isc-dhcp-server
 
+format-gitlab:
+	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir gitlab
+
+format-gitlab-runner:
+	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir gitlab-runner
+
 
 
 # validate
@@ -210,4 +240,10 @@ validate-vault:
 
 validate-dhcp:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
+
+validate-gitlab:
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir gitlab -var 'vsphere_password=$(vsphere_password)'
+
+validate-gitlab-runner:
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
 
