@@ -1,4 +1,4 @@
-vsphere_password=PrankWe66!
+vsphere_password=
 
 # init
 init-all:

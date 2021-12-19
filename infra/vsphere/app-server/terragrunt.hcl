@@ -1,7 +1,7 @@
 terraform {
   # deploy using development branch
   // source = "git@github.com:hernanku/infra-devops.git//terraform/xenorchestra/terraform-vm?ref=develop"
-  source = "/Users/admin/dev-projects/infra-devops/terraform/vmware/vsphere//single-vm"
+  source = "/Users/hanyiabey/dev-projects/infra-devops/terraform/vmware/vsphere//single-vm"
 
 }
 
