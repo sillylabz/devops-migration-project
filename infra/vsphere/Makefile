@@ -40,6 +40,9 @@ init-gitlab:
 init-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir gitlab-runner
 
+init-loadbalacer:
+	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir loadbalacer
+
 
 # plan
 plan-all:
@@ -80,6 +83,9 @@ plan-gitlab:
 
 plan-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
+
+plan-loadbalacer:
+	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir loadbalacer -var 'vsphere_password=$(vsphere_password)'
 
 
 
@@ -123,6 +129,9 @@ create-gitlab:
 create-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
 
+create-loadbalacer:
+	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir loadbalacer -var 'vsphere_password=$(vsphere_password)'
+
 
 # delete
 delete-all:
@@ -163,6 +172,9 @@ delete-gitlab:
 
 delete-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
+
+delete-loadbalacer:
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir loadbalacer -var 'vsphere_password=$(vsphere_password)'
 
 
 # format
@@ -205,6 +217,9 @@ format-gitlab:
 format-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir gitlab-runner
 
+format-loadbalacer:
+	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir loadbalacer
+
 
 
 # validate
@@ -246,4 +261,7 @@ validate-gitlab:
 
 validate-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
+
+validate-loadbalacer:
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir loadbalacer -var 'vsphere_password=$(vsphere_password)'
 
