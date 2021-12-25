@@ -40,8 +40,8 @@ init-gitlab:
 init-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir gitlab-runner
 
-init-loadbalacer:
-	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir loadbalacer
+init-loadbalancer:
+	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir loadbalancer
 
 
 # plan
@@ -84,8 +84,8 @@ plan-gitlab:
 plan-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
 
-plan-loadbalacer:
-	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir loadbalacer -var 'vsphere_password=$(vsphere_password)'
+plan-loadbalancer:
+	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
 
 
 
@@ -129,8 +129,8 @@ create-gitlab:
 create-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
 
-create-loadbalacer:
-	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir loadbalacer -var 'vsphere_password=$(vsphere_password)'
+create-loadbalancer:
+	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
 
 
 # delete
@@ -173,8 +173,8 @@ delete-gitlab:
 delete-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
 
-delete-loadbalacer:
-	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir loadbalacer -var 'vsphere_password=$(vsphere_password)'
+delete-loadbalancer:
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
 
 
 # format
@@ -217,8 +217,8 @@ format-gitlab:
 format-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir gitlab-runner
 
-format-loadbalacer:
-	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir loadbalacer
+format-loadbalancer:
+	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir loadbalancer
 
 
 
@@ -262,6 +262,6 @@ validate-gitlab:
 validate-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
 
-validate-loadbalacer:
-	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir loadbalacer -var 'vsphere_password=$(vsphere_password)'
+validate-loadbalancer:
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
 
