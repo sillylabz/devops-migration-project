@@ -1,0 +1,24 @@
+---
+packages:
+  - sssd
+  - sssd-tools
+  - libnss-sss
+  - libpam-sss
+  - realmd 
+  - oddjob 
+  - oddjob-mkhomedir 
+  - adcli 
+  - samba-common 
+  - samba-common-bin 
+  - packagekit
+  - python-pexpect
+  - python3-pexpect
+
+
+Join_User: administrator
+DomainName: labz.io
+Join_User_Pass: WindowsAdPassword
+realm: EXAMPLE.COM
+server: 10.0.0.2
+
+ou_membership: OU=Computers,OU=linux,DC=example,DC=com

@@ -1,0 +1,78 @@
+---
+- name: Join Linux VM to Windows AD
+  hosts: isc-dhcp-server
+  become: yes
+
+  tasks:
+    - name: include vars file
+      include_vars: linux-join-domain-vars.yaml
+
+    - name: Install required packages
+      apt:
+        name: "{{ packages }}"
+        state: present
+
+    - name: add dns servers to resolv.conf
+      blockinfile:
+        path: /etc/resolv.conf
+        backup: yes
+        state: present
+        block: | 
+          nameserver 10.0.0.24
+          search labz.io
+
+    - name: dns lookup
+      command:  /bin/bash -c "/usr/bin/nslookup {{ DomainName }}"
+      register: dns_lookup
+
+    - debug:
+        msg: "{{ dns_lookup.stdout }}"
+
+    - name: Checking Domain Join status
+      shell: /bin/bash -c "/usr/sbin/realm discover {{ DomainName }} | grep -q sssd"
+      register: ad_status
+      changed_when: false
+      ignore_errors: true
+
+    - name: Join {{ ansible_distribution }} {{ ansible_distribution_major_version }} into Domain {{ DomainName }}
+      expect:
+        command: /bin/bash -c "/usr/sbin/realm join {{ DomainName }} -U {{ Join_User }} --computer-ou={{ ou_membership }}" 
+        responses:
+          Password for *: "{{ Join_User_Pass }}"
+      when: ad_status.rc != 0
+
+    - name: Allow user Login without FQDN
+      lineinfile:
+        backup: yes
+        state: present
+        dest: /etc/sssd/sssd.conf
+        regexp: '^{{ item.search }}'
+        line: '{{ item.replace }}'
+      with_items:
+        - { search: 'use_fully_qualified_names', replace: 'use_fully_qualified_names = False' }
+        - { search: 'fallback_homedir', replace: 'fallback_homedir = /home/%u'}
+        - { search: 'access_provider', replace: 'access_provider = simple'}
+      notify: restart sssd
+
+
+  handlers:
+    # handlers file for CentOSJoinDomain
+    - name: Install pexpect 3.3
+      command: python setup.py install chdir=/root/pexpect-3.3
+
+    - name: restart sssd
+      systemd:
+        name: sssd
+        state: restarted
+        enabled: yes
+
+    - name: restart samba related services
+      service:
+        name: "{{ item }}"
+        state: restarted
+        enabled: yes
+      with_items:
+        - smb
+        - winbind
+        - messagebus
+        - oddjobd
