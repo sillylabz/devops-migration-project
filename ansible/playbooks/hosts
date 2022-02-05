@@ -30,12 +30,12 @@ ansible_password=devops123
 host_key_checking=False
 
 
-
 [sonarqubedb]
 10.0.0.58
 
 [sonarqubedb:vars]
 ansible_connection=ssh
+
 ansible_user=devops
 ansible_password=devops123
 host_key_checking=False
@@ -88,4 +88,5 @@ ansible_connection=ssh
 ansible_user=devops
 ansible_password=devops123
 host_key_checking=False
+
 

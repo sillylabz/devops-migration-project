@@ -1,5 +1,6 @@
 vsphere_password=
 
+
 # init
 init-all:
 	terragrunt run-all --terragrunt-non-interactive init 
@@ -44,6 +45,7 @@ init-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir loadbalancer
 
 
+
 # plan
 plan-all:
 	terragrunt run-all --terragrunt-non-interactive plan  -var 'vsphere_password=$(vsphere_password)'
@@ -74,6 +76,7 @@ plan-mongo:
 
 plan-vault:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir vault -var 'vsphere_password=$(vsphere_password)'
+
 
 plan-dhcp:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
@@ -120,6 +123,7 @@ create-mongo:
 create-vault:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir vault -var 'vsphere_password=$(vsphere_password)'
 
+
 create-dhcp:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
 
@@ -131,6 +135,7 @@ create-gitlab-runner:
 
 create-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
+
 
 
 # delete
@@ -164,6 +169,7 @@ delete-mongo:
 delete-vault:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir vault -var 'vsphere_password=$(vsphere_password)'
 
+
 delete-dhcp:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
 
@@ -175,6 +181,7 @@ delete-gitlab-runner:
 
 delete-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
+
 
 
 # format
@@ -207,6 +214,7 @@ format-mongo:
 
 format-vault:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir vault
+
 
 format-dhcp:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir isc-dhcp-server
@@ -253,6 +261,7 @@ validate-mongo:
 validate-vault:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir vault -var 'vsphere_password=$(vsphere_password)'
 
+
 validate-dhcp:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
 
@@ -264,4 +273,5 @@ validate-gitlab-runner:
 
 validate-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
+
 
