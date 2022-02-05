@@ -1,0 +1,43 @@
+- hosts: mongodb
+  become: yes
+  tasks:
+  - name: Copy file with owner and permissions
+    copy:
+      src: ./configs/mongo-org.repo
+      dest: /etc/yum.repos.d/
+
+  - name: Install mongodb-org package
+    yum:
+     name: mongodb-org
+     state: present
+
+  - name: Start the mongodb service
+    service:
+      name: mongod
+      state: started
+      enabled: yes
+
+  - name: Copy mongo file with owner and permissions
+    copy:
+      src: ./configs/mongod.conf
+      dest: /etc/
+    notify: 
+    - Restart mongod service
+
+  - name: Allow mongod service through firewall
+    firewalld:
+      port: "27017/tcp"
+      permanent: yes
+      state: enabled
+
+  - name: reload firewalld service
+    systemd:
+      name: firewalld
+      state: reloaded 
+
+  handlers:
+    - name: Restart mongod service
+      service:
+        name: mongod
+        state: restarted
+  

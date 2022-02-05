@@ -18,17 +18,16 @@ inputs = {
   vsphere_datacenter = "dc-east"
   vsphere_cluster    = "lab-cluster"
   vm_datastore       = "vmData1"
-  vm_name            = "splunk"
-  // vm_count = 5
+  vm_name            = "gitlab-runner"
+  // vm_count = 1
   vm_network     = "vmPublic"
   vm_template    = "base-centos8"
   vm_baseip      = "10.0.0"
-  vm_ip_suffix   = "56"
+  vm_ip_suffix   = "62"
   vm_netmask     = 24
   vm_gateway     = "10.0.0.1"
   vm_dns_servers = ["10.0.0.24"]
   vm_domain      = "labz.io"
   vm_cpu         = 1
-  vm_memory      = 2048
+  vm_memory      = 4096
 }
-

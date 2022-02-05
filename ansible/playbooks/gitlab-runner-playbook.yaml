@@ -1,0 +1,55 @@
+---
+- name: Install gitlab 
+  hosts: gitlab-runner
+  become: yes
+
+  tasks:
+  - name: Install yum utils
+    yum:
+      name: yum-utils
+      state: latest
+
+  - name: Add docker repository on CentOS 8
+    shell: dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+    when: 
+      ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] == '8'
+
+  - name: Enable EPEL Repository on CentOS 8
+    dnf:
+      name: epel-release
+      state: latest
+    when: 
+      ansible_facts['os_family'] == 'RedHat' and ansible_facts['distribution_major_version'] == '8'
+  
+  - name: Install docker ce
+    yum:
+      name: '{{ item }}'
+      state: latest
+    loop:
+      - docker-ce 
+      - docker-ce-cli 
+      - containerd.io
+    when: 
+      ansible_facts['os_family'] == 'RedHat'
+
+  - name: Start and enable docker-ce services
+    systemd:
+      name: docker
+      state: started
+      enabled: yes
+    when: 
+      ansible_facts['os_family'] == 'RedHat'
+  
+  - name: Check docker ce install and version
+    shell: systemctl status docker
+    register: docker_status
+    when: 
+      ansible_facts['os_family'] == 'RedHat'
+
+  - debug: msg="{{ docker_status.stdout }}"
+    when: 
+      ansible_facts['os_family'] == 'RedHat' 
+    
+    
+
+
