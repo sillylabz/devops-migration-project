@@ -8,6 +8,9 @@ init-all:
 init-app-server:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir app-server
 
+init-artifactory:
+	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir artifactory
+
 init-jenkins:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir jenkins
 
@@ -53,6 +56,9 @@ plan-all:
 plan-app-server:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir app-server -var 'vsphere_password=$(vsphere_password)'
 
+plan-artifactory:
+	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir artifactory -var 'vsphere_password=$(vsphere_password)'
+
 plan-jenkins:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir jenkins -var 'vsphere_password=$(vsphere_password)'
 
@@ -77,7 +83,6 @@ plan-mongo:
 plan-vault:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir vault -var 'vsphere_password=$(vsphere_password)'
 
-
 plan-dhcp:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
 
@@ -98,6 +103,9 @@ create-all:
 
 create-app-server:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir app-server -var 'vsphere_password=$(vsphere_password)'
+
+create-artifactory:
+	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir artifactory -var 'vsphere_password=$(vsphere_password)'
 
 create-jenkins:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir jenkins -var 'vsphere_password=$(vsphere_password)'
@@ -123,7 +131,6 @@ create-mongo:
 create-vault:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir vault -var 'vsphere_password=$(vsphere_password)'
 
-
 create-dhcp:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
 
@@ -144,6 +151,9 @@ delete-all:
 
 delete-app-server:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir app-server -var 'vsphere_password=$(vsphere_password)'
+
+delete-artifactory:
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir artifactory -var 'vsphere_password=$(vsphere_password)'
 
 delete-jenkins:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir jenkins -var 'vsphere_password=$(vsphere_password)'
@@ -169,7 +179,6 @@ delete-mongo:
 delete-vault:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir vault -var 'vsphere_password=$(vsphere_password)'
 
-
 delete-dhcp:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
 
@@ -190,6 +199,9 @@ format-all:
 
 format-app-server:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir app-server
+
+format-artifactory:
+	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir artifactory
 
 format-jenkins:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir jenkins
@@ -215,7 +227,6 @@ format-mongo:
 format-vault:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir vault
 
-
 format-dhcp:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir isc-dhcp-server
 
@@ -236,6 +247,9 @@ validate-all:
 
 validate-app-server:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir app-server -var 'vsphere_password=$(vsphere_password)'
+
+validate-artifactory:
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir artifactory -var 'vsphere_password=$(vsphere_password)'
 
 validate-jenkins:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir jenkins -var 'vsphere_password=$(vsphere_password)'
@@ -260,7 +274,6 @@ validate-mongo:
 
 validate-vault:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir vault -var 'vsphere_password=$(vsphere_password)'
-
 
 validate-dhcp:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir isc-dhcp-server -var 'vsphere_password=$(vsphere_password)'
