@@ -12,6 +12,7 @@
 **/.bundle
 **/.ruby-version
 **/.terraform.lock.hcl
+**/.terraform.*
 **/terragrunt
 
 # bash ignore
