@@ -5,9 +5,13 @@ terraform {
 }
 
 remote_state {
-  backend = "local"
+  backend = "artifactory"
   config = {
-    path = "${get_terragrunt_dir()}/terraform.tfstate"
+    username = "automation_cli"
+    password = "Devops123"
+    url      = "http://10.0.0.64:8081/artifactory"
+    repo     = "infra-devops-terraform"
+    subpath  = "gitlab-runner/terraform.tfstate"
   }
 }
 
@@ -21,7 +25,7 @@ inputs = {
   vm_name            = "gitlab-runner"
   // vm_count = 1
   vm_network     = "vmPublic"
-  vm_template    = "base-centos8"
+  vm_template    = "base-ubuntu20"
   vm_baseip      = "10.0.0"
   vm_ip_suffix   = "62"
   vm_netmask     = 24
