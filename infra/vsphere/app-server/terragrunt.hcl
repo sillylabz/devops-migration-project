@@ -6,11 +6,16 @@ terraform {
 }
 
 remote_state {
-  backend = "local"
+  backend = "artifactory"
   config = {
-    path = "${get_terragrunt_dir()}/terraform.tfstate"
+    username = "automation_cli"
+    password = "Devops123"
+    url      = "http://10.0.0.64:8081/artifactory"
+    repo     = "infra-devops-terraform"
+    subpath  = "app-server/terraform.tfstate"
   }
 }
+
 
 inputs = {
   vsphere_server_url = "10.0.0.25"
