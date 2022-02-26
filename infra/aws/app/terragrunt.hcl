@@ -1,13 +1,12 @@
 terraform {
   # deploy using development branch
-  // source = "git::https://github.com/hernanku/infra-devops.git//terraform/aws/sample-ec2?ref=develop"
-  source = "/Users/hanyiabey/dev-projects/infra-devops/terraform/aws/sample-ec2"
+  source = "git::https://github.com/hernanku/infra-devops.git//terraform/aws/sample-ec2?ref=develop"
 }
 
 remote_state {
   backend = "s3"
   config = {
-    bucket = "cloudops-remote-state20210623162046416500000002"
+    bucket = "terraform-remote-state"
     region = "us-east-1"
     key    = "app/terraform.tfstate"
   }
@@ -15,18 +14,17 @@ remote_state {
 
 
 inputs = {
-  vpc_id              = ""
-  private_subnets_tag = [""]
+  vpc_id              = "vpc-xxxxxxxxxxxxxxx"
+  private_subnets_tag = ["*"]
   aws_region          = "us-east-1"
 
   project_name     = "sandbox"
-  application_name = "sample"
-  environment      = "ocs"
-  cost_center      = ""
-  owner            = ""
+  application_name = "sample-app"
+  environment      = "dev"
+  owner            = "Skala"
   operating_system = "Linux"
 
-  asg_ssh_key_name = "OCS_Prod"
+  asg_ssh_key_name = ""
   // subnet_filter_tag = "public"
   // iam_instance_profile = "AmazonSSMRoleForInstancesQuickSetup"
   asg_instance_type = "t3.medium"
