@@ -1,7 +1,7 @@
 terraform {
   # deploy using development branch
-  source = "git::https://github.com/hernanku/infra-devops.git//terraform/aws/sample-ec2?ref=develop"
-  # source = "/Users/admin/dev-pjcts/packer-scripts/xenserver/terraform-vm"
+  // source = "git::https://github.com/hernanku/infra-devops.git//terraform/aws/sample-ec2?ref=develop"
+  source = "/Users/hanyiabey/dev-projects/infra-devops/terraform/aws/sample-ec2"
 }
 
 remote_state {
@@ -9,60 +9,47 @@ remote_state {
   config = {
     bucket = "cloudops-remote-state20210623162046416500000002"
     region = "us-east-1"
-    key    = "${path_relative_to_include()}/terraform.tfstate"
+    key    = "app/terraform.tfstate"
   }
 }
 
 
 inputs = {
-  aws_region = "us-east-1"
-  project_name  = "sandbox"
-  application_name  = "cicd"
-  environment  = "ocs"
-  owner = "Humberto Pombo"
-  cost_center = "1495"
+  vpc_id              = ""
+  private_subnets_tag = [""]
+  aws_region          = "us-east-1"
 
-  subnet_filter_tag = "OCS_Zone*"
-  elb_healthy_threshold = 2
-  elb_unhealthy_threshold = 2
-  elb_timeout = 3
-  elb_interval = 30
+  project_name     = "sandbox"
+  application_name = "sample"
+  environment      = "ocs"
+  cost_center      = ""
+  owner            = ""
+  operating_system = "Linux"
 
-  asg_elb_listeners = []
   asg_ssh_key_name = "OCS_Prod"
-  asg_grace = 300
-  min_size = 1
-  max_size = 15
-  desired_capacity = 1
-  health_check_type = "ELB"
+  // subnet_filter_tag = "public"
+  // iam_instance_profile = "AmazonSSMRoleForInstancesQuickSetup"
   asg_instance_type = "t3.medium"
-  asg_ami_id = "ami-0cde254ff022fc089"
-  asg_block_device_mappings = []
-
-  initial_lifecycle_hooks = [
+  asg_ami_id        = "ami-0ed9277fb7eb570c9"
+  asg_elb_listeners = [
     {
-      name                 = "StartupLifeCycleHook"
-      default_result       = "CONTINUE"
-      heartbeat_timeout    = 120
-      lifecycle_transition = "autoscaling:EC2_INSTANCE_LAUNCHING"
-      notification_metadata = <<EOF
-    {
-      "status": "Instance launching"
-    }
-    EOF
+      instance_port     = 22
+      instance_protocol = "tcp"
+      lb_port           = 22
+      lb_protocol       = "tcp"
     },
-    {
-      name                 = "TerminationLifeCycleHook"
-      default_result       = "CONTINUE"
-      heartbeat_timeout    = 120
-      lifecycle_transition = "autoscaling:EC2_INSTANCE_TERMINATING"
-      notification_metadata = <<EOF
-    {
-      "status": "Instance terminating"
-    }
-    EOF
-    }
   ]
+
+  elb_healthy_threshold   = 2
+  elb_unhealthy_threshold = 2
+  elb_timeout             = 3
+  elb_interval            = 30
+  max_size                = 5
+  min_size                = 1
+  asg_grace               = 300
+  health_check_type       = "EC2"
+  desired_capacity        = 1
+
   asg_block_device_mappings = [
     {
       # Root volume
@@ -71,9 +58,35 @@ inputs = {
       ebs = {
         delete_on_termination = true
         encrypted             = true
-        volume_size           = 50
+        volume_size           = 20
         volume_type           = "gp2"
       }
+    }
+  ]
+
+  // s3_backend_bucket_name = "cloudops-remote-state20210616181255331200000002"
+  asg_initial_lifecycle_hooks = [
+    {
+      name                  = "StartupLifeCycleHook"
+      default_result        = "CONTINUE"
+      heartbeat_timeout     = 120
+      lifecycle_transition  = "autoscaling:EC2_INSTANCE_LAUNCHING"
+      notification_metadata = <<EOF
+  {
+      "status": "Instance launching"
+  }
+  EOF
+    },
+    {
+      name                  = "TerminationLifeCycleHook"
+      default_result        = "CONTINUE"
+      heartbeat_timeout     = 120
+      lifecycle_transition  = "autoscaling:EC2_INSTANCE_TERMINATING"
+      notification_metadata = <<EOF
+  {
+      "status": "Instance terminating"
+  }
+  EOF
     }
   ]
 }
