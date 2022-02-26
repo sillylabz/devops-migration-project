@@ -14,6 +14,9 @@ init-artifactory:
 init-jenkins:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir jenkins
 
+init-jenkins-docker-agent:
+	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir jenkins-docker-agent
+
 init-sonarqube:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir sonarqube
 
@@ -61,6 +64,9 @@ plan-artifactory:
 
 plan-jenkins:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir jenkins -var 'vsphere_password=$(vsphere_password)'
+
+plan-jenkins-docker-agent:
+	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir jenkins-docker-agent -var 'vsphere_password=$(vsphere_password)'
 
 plan-sonarqube:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir sonarqube -var 'vsphere_password=$(vsphere_password)'
@@ -110,6 +116,9 @@ create-artifactory:
 create-jenkins:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir jenkins -var 'vsphere_password=$(vsphere_password)'
 
+create-jenkins-docker-agent:
+	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir jenkins-docker-agent -var 'vsphere_password=$(vsphere_password)'
+
 create-sonarqube:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir sonarqube -var 'vsphere_password=$(vsphere_password)'
 
@@ -157,6 +166,9 @@ delete-artifactory:
 
 delete-jenkins:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir jenkins -var 'vsphere_password=$(vsphere_password)'
+
+delete-jenkins-docker-agent:
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir jenkins-docker-agent -var 'vsphere_password=$(vsphere_password)'
 
 delete-sonarqube:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir sonarqube -var 'vsphere_password=$(vsphere_password)'
@@ -206,6 +218,9 @@ format-artifactory:
 format-jenkins:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir jenkins
 
+format-jenkins-docker-agent:
+	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir jenkins-docker-agent
+
 format-sonarqube:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir sonarqube
 
@@ -253,6 +268,9 @@ validate-artifactory:
 
 validate-jenkins:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir jenkins -var 'vsphere_password=$(vsphere_password)'
+
+validate-jenkins-docker-agent:
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir jenkins-docker-agent -var 'vsphere_password=$(vsphere_password)'
 
 validate-sonarqube:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir sonarqube -var 'vsphere_password=$(vsphere_password)'
