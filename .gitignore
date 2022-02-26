@@ -12,12 +12,16 @@
 **/.bundle
 **/.ruby-version
 **/.terraform.lock.hcl
-**/.terraform.*
-**/terragrunt
+**/.terraform*
+**/.terragrunt*
+**/.ssh*
 
 # bash ignore
-**/.ash_history
-**/.aws
-**/.kube
+**/.ash_history*
+**/.aws*
+**/.kube*
+**/.npm*
+**/.nvm*
+**/.config*
 
 
