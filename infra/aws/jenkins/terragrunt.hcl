@@ -88,7 +88,5 @@ inputs = {
   EOF
     }
   ]
-  ansible_inventory_file = "../../ansible/playbooks/jenkins/jenkins-inventory.yaml"
-  ansible_playbook_file = "../../ansible/playbooks/jenkins/jenkins-playbook.yaml"
 }
 

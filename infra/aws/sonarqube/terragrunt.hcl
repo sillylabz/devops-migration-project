@@ -6,29 +6,30 @@ terraform {
 remote_state {
   backend = "s3"
   config = {
-    bucket = "terraform-remote-state"
+    bucket = "cloudops-remote-state20210623162046416500000002"
     region = "us-east-1"
-    key    = "app/terraform.tfstate"
+    key    = "sample-infra/sonarqube/terraform.tfstate"
   }
 }
 
 
 inputs = {
-  vpc_id              = "vpc-xxxxxxxxxxxxxxx"
-  private_subnets_tag = ["*"]
+  vpc_id              = "vpc-0a62cca0a1507beac"
+  private_subnets_tag = ["OCS_Zone*"]
   aws_region          = "us-east-1"
 
   project_name     = "sandbox"
   application_name = "sonarqube"
-  environment      = "dev"
-  owner            = "Skala"
+  environment      = "ocs"
+  owner            = "Humberto Pombo"
+  cost_center = "1495"
   operating_system = "Linux"
 
-  asg_ssh_key_name = ""
+  asg_ssh_key_name = "OCS_Prod"
   // subnet_filter_tag = "public"
   // iam_instance_profile = "AmazonSSMRoleForInstancesQuickSetup"
   asg_instance_type = "t3.medium"
-  asg_ami_id        = "ami-0ed9277fb7eb570c9"
+  asg_ami_id        = "ami-033b95fb8079dc481"
   asg_elb_listeners = [
     {
       instance_port     = 22

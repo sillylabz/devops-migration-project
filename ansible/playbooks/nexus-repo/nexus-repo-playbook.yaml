@@ -1,9 +1,11 @@
 ---
 - name: Install nexus repo on Centos
-  hosts: nexus-repo
+  hosts: localhost
+  connection: local
   become: yes
 
   pre_tasks:
+    - set_fact: ansible_python_interpreter=/usr/bin/python
     - name: Install package dependencies.
       package:
         name: "{{ item }}"
@@ -12,17 +14,18 @@
         - unzip
         - rsync
 
-  post_tasks:
-    - name: Allow nexus repo service through firewall
-      firewalld:
-        port: "8081/tcp"
-        permanent: yes
-        state: enabled
-    #   become: yes
-    - name: reload firewalld service
-      systemd:
-        name: firewalld
-        state: reloaded
+  # Run on non-cloud implementations
+  # post_tasks:
+  #   - name: Allow nexus repo service through firewall
+  #     firewalld:
+  #       port: "8081/tcp"
+  #       permanent: yes
+  #       state: enabled
+  #   #   become: yes
+  #   - name: reload firewalld service
+  #     systemd:
+  #       name: firewalld
+  #       state: reloaded
 
   roles:
     - role: geerlingguy.java
