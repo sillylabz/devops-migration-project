@@ -14,7 +14,7 @@
         - unzip
         - rsync
 
-  # Run on non-cloud implementations
+  ## Run on non-cloud implementations
   # post_tasks:
   #   - name: Allow nexus repo service through firewall
   #     firewalld:

@@ -6,7 +6,7 @@ terraform {
 remote_state {
   backend = "s3"
   config = {
-    bucket = "cloudops-remote-state20210623162046416500000002"
+    bucket = "terraform-remote-state"
     region = "us-east-1"
     key    = "sample-infra/jenkins/terraform.tfstate"
   }
@@ -14,18 +14,18 @@ remote_state {
 
 
 inputs = {
-  vpc_id              = "vpc-0a62cca0a1507beac"
-  private_subnets_tag = ["OCS_Zone*"]
+  vpc_id              = "vpc-abcdef1234"
+  private_subnets_tag = ["public*"]
   aws_region          = "us-east-1"
 
   project_name     = "sandbox"
   application_name = "jenkins"
-  environment      = "ocs"
-  owner            = "Humberto Pombo"
-  cost_center = "1495"
+  environment      = "aws"
+  owner            = "Robert Smith"
+  cost_center = "1234"
   operating_system = "Linux"
 
-  asg_ssh_key_name = "OCS_Prod"
+  asg_ssh_key_name = "dev-ssh-key"
   // subnet_filter_tag = "public"
   // iam_instance_profile = "AmazonSSMRoleForInstancesQuickSetup"
   asg_instance_type = "t3.medium"
@@ -63,7 +63,6 @@ inputs = {
     }
   ]
 
-  // s3_backend_bucket_name = "cloudops-remote-state20210616181255331200000002"
   asg_initial_lifecycle_hooks = [
     {
       name                  = "StartupLifeCycleHook"
