@@ -34,6 +34,6 @@ inputs = {
   vm_dns_servers = ["10.0.0.24"]
   vm_domain      = "labz.io"
   vm_cpu         = 1
-  vm_memory      = 2048
+  vm_memory      = 4096
 }
 
