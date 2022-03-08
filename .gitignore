@@ -15,7 +15,6 @@
 **/.terraform*
 **/.terragrunt*
 **/.ssh*
-
 # bash ignore
 **/.ash_history*
 **/.aws*
@@ -25,3 +24,5 @@
 **/.config*
 
 
+# packer ignore
+**/*.pkvar*

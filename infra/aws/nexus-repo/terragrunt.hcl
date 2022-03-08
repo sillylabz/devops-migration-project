@@ -1,36 +1,57 @@
 terraform {
   # deploy using development branch
-  # source = "git@github.com:hernanku/infra-devops.git//terraform/aws/sample-ec2?ref=develop"
-  source = "/Users/admin/dev-pjcts/infra-devops/terraform/aws//sample-ec2"
+  source = "git::https://github.com/hernanku/infra-devops.git//terraform/aws/sample-ec2?ref=develop"
 }
 
 remote_state {
-  backend = "local"
+  backend = "s3"
   config = {
-    path = "${get_terragrunt_dir()}/terraform.tfstate"
+    bucket = "terraform-remote-state"
+    region = "us-east-1"
+    key    = "sample-infra/nexus-repo/terraform.tfstate"
   }
 }
 
-dependency "vpc" {
-  config_path  = "../vpc"
-  skip_outputs = true
-}
 
 inputs = {
-  aws_region        = "us-east-1"
-  environment       = "dev"
-  project_name      = "devops"
-  application_name  = "nexus-repo"
-  subnet_filter_tag = "public"
-  asg_instance_type = "t3.micro"
-  health_check_type = "EC2"
-  min_size          = 0
-  max_size          = 1
-  desired_capacity  = 1
-  asg_ssh_key_name  = "always-dev-kp"
-  asg_ami_id        = "ami-02e136e904f3da870"
+  vpc_id              = "vpc-abcdef1234"
+  private_subnets_tag = ["public*"]
+  aws_region          = "us-east-1"
+
+  project_name     = "sandbox"
+  application_name = "nexus-repo"
+  environment      = "aws"
+  owner            = "Robert Smith"
+  cost_center      = "1234"
+  operating_system = "Linux"
+
+  asg_ssh_key_name = "dev-ssh-key"
+  // subnet_filter_tag = "public"
+  // iam_instance_profile = "AmazonSSMRoleForInstancesQuickSetup"
+  asg_instance_type = "t3.medium"
+  asg_ami_id        = "ami-033b95fb8079dc481"
+  asg_elb_listeners = [
+    {
+      instance_port     = 22
+      instance_protocol = "tcp"
+      lb_port           = 22
+      lb_protocol       = "tcp"
+    },
+  ]
+
+  elb_healthy_threshold   = 2
+  elb_unhealthy_threshold = 2
+  elb_timeout             = 3
+  elb_interval            = 30
+  max_size                = 5
+  min_size                = 1
+  asg_grace               = 300
+  health_check_type       = "EC2"
+  desired_capacity        = 1
+
   asg_block_device_mappings = [
     {
+      # Root volume
       device_name = "/dev/xvda"
       no_device   = 0
       ebs = {
@@ -42,21 +63,29 @@ inputs = {
     }
   ]
 
-  asg_elb_listeners = [
+  asg_initial_lifecycle_hooks = [
     {
-      instance_port     = 22
-      instance_protocol = "tcp"
-      lb_port           = 22
-      lb_protocol       = "tcp"
-    },
-  ]
-
-  asg_elb_health_check = {
-    target              = "TCP:22"
-    interval            = 30
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
-    timeout             = 5
+      name                  = "StartupLifeCycleHook"
+      default_result        = "CONTINUE"
+      heartbeat_timeout     = 120
+      lifecycle_transition  = "autoscaling:EC2_INSTANCE_LAUNCHING"
+      notification_metadata = <<EOF
+  {
+      "status": "Instance launching"
   }
+  EOF
+    },
+    {
+      name                  = "TerminationLifeCycleHook"
+      default_result        = "CONTINUE"
+      heartbeat_timeout     = 120
+      lifecycle_transition  = "autoscaling:EC2_INSTANCE_TERMINATING"
+      notification_metadata = <<EOF
+  {
+      "status": "Instance terminating"
+  }
+  EOF
+    }
+  ]
 }
 
