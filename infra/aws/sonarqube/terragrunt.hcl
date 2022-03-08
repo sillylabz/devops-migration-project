@@ -62,7 +62,6 @@ inputs = {
       }
     }
   ]
-
   asg_initial_lifecycle_hooks = [
     {
       name                  = "StartupLifeCycleHook"

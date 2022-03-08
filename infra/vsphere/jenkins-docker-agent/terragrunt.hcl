@@ -35,5 +35,5 @@ inputs = {
   vm_domain      = "labz.io"
   vm_cpu         = 1
   vm_memory      = 4096
-}
+
 
