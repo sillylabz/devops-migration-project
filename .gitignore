@@ -24,3 +24,5 @@
 **/.config*
 
 
+# packer ignore
+**/*.pkvar*

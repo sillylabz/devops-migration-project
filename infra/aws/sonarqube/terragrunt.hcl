@@ -8,27 +8,28 @@ remote_state {
   config = {
     bucket = "terraform-remote-state"
     region = "us-east-1"
-    key    = "app/terraform.tfstate"
+    key    = "sample-infra/sonarqube/terraform.tfstate"
   }
 }
 
 
 inputs = {
-  vpc_id              = "vpc-xxxxxxxxxxxxxxx"
-  private_subnets_tag = ["*"]
+  vpc_id              = "vpc-abcdef1234"
+  private_subnets_tag = ["public*"]
   aws_region          = "us-east-1"
 
   project_name     = "sandbox"
   application_name = "sonarqube"
-  environment      = "dev"
-  owner            = "Skala"
+  environment      = "aws"
+  owner            = "Robert Smith"
+  cost_center      = "1234"
   operating_system = "Linux"
 
-  asg_ssh_key_name = ""
+  asg_ssh_key_name = "dev-ssh-key"
   // subnet_filter_tag = "public"
   // iam_instance_profile = "AmazonSSMRoleForInstancesQuickSetup"
   asg_instance_type = "t3.medium"
-  asg_ami_id        = "ami-0ed9277fb7eb570c9"
+  asg_ami_id        = "ami-033b95fb8079dc481"
   asg_elb_listeners = [
     {
       instance_port     = 22
@@ -61,8 +62,6 @@ inputs = {
       }
     }
   ]
-
-  // s3_backend_bucket_name = "cloudops-remote-state20210616181255331200000002"
   asg_initial_lifecycle_hooks = [
     {
       name                  = "StartupLifeCycleHook"
