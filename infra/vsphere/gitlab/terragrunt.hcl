@@ -16,12 +16,12 @@ remote_state {
 }
 
 inputs = {
-  vsphere_server_url = "10.0.0.25"
+  vsphere_server_url = "10.0.0.31"
   vsphere_user       = "administrator@vsphere.local"
   vsphere_password   = ""
   vsphere_datacenter = "dc-east"
-  vsphere_cluster    = "lab-cluster"
-  vm_datastore       = "vmData1"
+  vsphere_cluster    = "lab-dev"
+  vm_datastore       = "vmData"
   vm_name            = "gitlab"
   // vm_count = 1
   vm_network     = "vmPublic"
@@ -30,7 +30,7 @@ inputs = {
   vm_ip_suffix   = "61"
   vm_netmask     = 24
   vm_gateway     = "10.0.0.1"
-  vm_dns_servers = ["10.0.0.24"]
+  vm_dns_servers = ["10.0.0.29"]
   vm_domain      = "labz.io"
   vm_cpu         = 2
   vm_memory      = 4096
