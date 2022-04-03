@@ -1,3 +1,3 @@
 terraform {
-  backend "artifactoy" {}
+  backend "artifactory" {}
 }
