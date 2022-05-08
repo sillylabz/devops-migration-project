@@ -11,7 +11,7 @@ remote_state {
     password = "Devops123"
     url      = "http://10.0.0.64:8081/artifactory"
     repo     = "infra-devops-terraform"
-    subpath  = "sonarqube/terraform.tfstate"
+    subpath  = "gitlab-runner-docker/terraform.tfstate"
   }
 }
 
@@ -22,17 +22,16 @@ inputs = {
   vsphere_datacenter = "dc-east"
   vsphere_cluster    = "lab-dev"
   vm_datastore       = "vmData"
-  vm_name            = "sonarqube"
+  vm_name            = "gitlab-runner-docker"
   // vm_count = 1
   vm_network     = "vmPublic"
   vm_template    = "base-ubuntu20"
   vm_baseip      = "10.0.0"
-  vm_ip_suffix   = "55"
+  vm_ip_suffix   = "63"
   vm_netmask     = 24
   vm_gateway     = "10.0.0.1"
   vm_dns_servers = ["10.0.0.29"]
   vm_domain      = "labz.io"
   vm_cpu         = 1
-  vm_memory      = 2048
+  vm_memory      = 4096
 }
-
