@@ -47,6 +47,9 @@ init-gitlab:
 init-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir gitlab-runner
 
+init-gitlab-runner-docker:
+	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir gitlab-runner-docker
+
 init-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive init --terragrunt-include-dir loadbalancer
 
@@ -97,6 +100,9 @@ plan-gitlab:
 
 plan-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
+
+plan-gitlab-runner-docker:
+	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir gitlab-runner-docker -var 'vsphere_password=$(vsphere_password)'
 
 plan-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive plan --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
@@ -149,6 +155,9 @@ create-gitlab:
 create-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
 
+create-gitlab-runner-docker:
+	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir gitlab-runner-docker -var 'vsphere_password=$(vsphere_password)'
+
 create-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive apply --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
 
@@ -199,6 +208,9 @@ delete-gitlab:
 
 delete-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
+
+delete-gitlab-runner-docker:
+	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir gitlab-runner-docker -var 'vsphere_password=$(vsphere_password)'
 
 delete-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive destroy --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
@@ -251,6 +263,9 @@ format-gitlab:
 format-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir gitlab-runner
 
+format-gitlab-runner-docker:
+	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir gitlab-runner-docker
+
 format-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive fmt --terragrunt-include-dir loadbalancer
 
@@ -301,6 +316,9 @@ validate-gitlab:
 
 validate-gitlab-runner:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir gitlab-runner -var 'vsphere_password=$(vsphere_password)'
+
+validate-gitlab-runner-docker:
+	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir gitlab-runner-docker -var 'vsphere_password=$(vsphere_password)'
 
 validate-loadbalancer:
 	terragrunt run-all --terragrunt-non-interactive validate --terragrunt-include-dir loadbalancer -var 'vsphere_password=$(vsphere_password)'
