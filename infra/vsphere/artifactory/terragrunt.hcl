@@ -6,13 +6,13 @@ terraform {
 }
 
 remote_state {
-  backend = "artifactory"
+  backend = "local"
   config = {
-    username = "automation_cli"
-    password = "Devops123"
-    url      = "http://10.0.0.64:8081/artifactory"
-    repo     = "infra-devops-terraform"
-    subpath  = "artifactory/terraform.tfstate"
+    // username = "automation_cli"
+    // password = "Devops123"
+    // url      = "http://10.0.0.64:8081/artifactory"
+    // repo     = "infra-devops-terraform"
+    // subpath  = "artifactory/terraform.tfstate"
   }
 }
 
@@ -32,7 +32,7 @@ inputs = {
   vm_ip_suffix   = "64"
   vm_netmask     = 24
   vm_gateway     = "10.0.0.1"
-  vm_dns_servers = ["10.0.0.29"]
+  vm_dns_servers = ["8.8.8.8"]
   vm_domain      = "labz.io"
   vm_cpu         = 1
   vm_memory      = 2048
