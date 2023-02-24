@@ -22,7 +22,11 @@ inputs = {
   vsphere_datacenter = "dc-east"
   vsphere_cluster    = "lab-dev"
   vm_datastore       = "vmData"
+<<<<<<<< HEAD:infra/vsphere/gitlab-runner-docker/terragrunt.hcl
   vm_name            = "gitlab-runner-docker"
+========
+  vm_name            = "sensu"
+>>>>>>>> master:infra/vsphere/sensu/terragrunt.hcl
   // vm_count = 1
   vm_network     = "vmPublic"
   vm_template    = "base-ubuntu20"

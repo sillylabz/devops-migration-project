@@ -1,19 +1,19 @@
 init:
-	terragrunt init
+	terraform init -reconfigure
 
 plan:
-	terragrunt plan
+	terraform plan
 
 apply:
-	terragrunt apply -auto-approve
+	terraform apply -auto-approve
 
 destroy:
-	terragrunt destroy -auto-approve
+	terraform destroy -auto-approve
 
 fmt:
-	terragrunt hclfmt
+	terraform fmt
 
 validate:
-	terragrunt validate-inputs
+	terraform validate
 
 
