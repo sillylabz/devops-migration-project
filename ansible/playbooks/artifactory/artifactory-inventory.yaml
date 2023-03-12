@@ -1,0 +1,10 @@
+localhost:
+  hosts:
+    10.0.0.37:
+  vars:
+    ansible_connection: ssh
+    ansible_user: devops
+    ansible_password: devops123
+    ansible_host_key_checking: false
+    ansible_python_interpreter: /usr/bin/python3
+

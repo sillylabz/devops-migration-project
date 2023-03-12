@@ -1,20 +1,21 @@
+vsphere_password ?= "vsphere-password"
 
 init:
-	terragrunt init
+	terraform init -reconfigure
 
 plan:
-	terragrunt run-all plan
+	TF_VAR_vsphere_password=$(vsphere_password) terraform plan
 
 apply:
-	terragrunt apply -auto-approve
+	TF_VAR_vsphere_password=$(vsphere_password) terraform apply -auto-approve
 
 destroy:
-	terragrunt destroy -auto-approve
+	TF_VAR_vsphere_password=$(vsphere_password) terraform destroy -auto-approve
 
 fmt:
-	terragrunt hclfmt
+	terraform fmt
 
 validate:
-	terragrunt validate-inputs
+	TF_VAR_vsphere_password=$(vsphere_password) terraform validate
 
 
