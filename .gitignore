@@ -26,3 +26,6 @@
 
 # packer ignore
 **/*.pkvar*
+
+# ansible ignore
+**/*.ansible*
