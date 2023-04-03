@@ -1,2 +1,4 @@
-- src: jfrog.platform
+collections:
+  - name: ns.coll
+
 
