@@ -1,5 +1,5 @@
 
-module "gitlab-runner-docker" {
+module "runners-server" {
   source = "git::https://github.com/hernanku/infra-devops.git//terraform/vmware/vsphere/single-vm-cloud"
   vsphere_server_url = "192.168.1.11"
   vsphere_user       = "administrator@vsphere.local"

@@ -15,6 +15,7 @@
   
   collections:
     - jfrog.platform
+    - community.general
 
   roles:
     - role: artifactory
