@@ -1,5 +1,5 @@
 
-module "gitlab-runner-docker" {
+module "app-server1" {
   source = "git::https://github.com/hernanku/infra-devops.git//terraform/vmware/vsphere/single-vm-cloud"
   vsphere_server_url = "192.168.1.11"
   vsphere_user       = "administrator@vsphere.local"
@@ -16,7 +16,7 @@ module "gitlab-runner-docker" {
   vm_dns_search_domain = "labz.io"
   // vm_count = 1
   vm_network     = "vmPub"
-  vm_template    = "base-ubuntu22-templ-2"
+  vm_template    = "ubuntu22-templ-base-gold"
   vm_cpu         = 2
   vm_memory      = 4092
 }
