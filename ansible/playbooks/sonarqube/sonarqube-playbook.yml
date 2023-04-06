@@ -4,40 +4,32 @@
   become: yes
 
   pre_tasks:
-    - name: Install EPEL Repository
-      shell: amazon-linux-extras install epel -y
-
-    - name: Install Daeomize
-      yum: 
-        name: daemonize
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    - name: Install required packages
+      apt:
+        name: "{{ required_packages }}"
         state: present
-    
-    - name: Install java jdk 11
-      command: amazon-linux-extras install java-openjdk11 -y
+      vars:
+        required_packages:
+          - unzip
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    - name: Install Java 11 Ubuntu/Debian
+      become: yes
+      apt:
+        name: "{{ java_packages }}"
+        state: present
+      vars:
+        java_packages:
+           - openjdk-11-jdk
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-    - name: Install package dependencies.
-      package:
-        name: "{{ item }}"
-        state: "present"
-      with_items:
-        - unzip
-        - rsync
-
-  ## Run on non-cloud implementations
-  # post_tasks:
-  #   - name: Allow sonarqube service through firewall
-  #     firewalld:
-  #       port: "9000/tcp"
-  #       permanent: yes
-  #       state: enabled
-  #   - name: reload firewalld service
-  #     systemd:
-  #       name: firewalld
-  #       state: reloaded
   roles:
     # - role: geerlingguy.java
     #   java_packages: 
-    #     - java-openjdk11
+    #     - openjdk-11-jdk
 
     - role: lrk.sonarqube
       vars:
