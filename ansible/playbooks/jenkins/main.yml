@@ -1,0 +1,42 @@
+---
+- name: Install Jenkins on Linux
+  hosts: localhost
+  gather_facts: true
+  become: yes
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    - name: Install required packages
+      apt:
+        name: "{{ required_packages }}"
+        state: present
+      vars:
+        required_packages:
+          - unzip
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    - name: Install Java 11 Ubuntu/Debian
+      become: yes
+      apt:
+        name: "{{ java_packages }}"
+        state: present
+      vars:
+        java_packages:
+           - openjdk-11-jdk
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+  roles:
+    - role: geerlingguy.jenkins
+      vars:
+        jenkins_hostname: jenkins.labz.io
+        jenkins_version: "2.346"
+        jenkins_plugins_state: present
+        jenkins_plugins_install_dependencies: true
+        jenkins_admin_username: admin
+        jenkins_admin_password: admin
+        # jenkins_plugins:
+        #   - blueocean
+        #   - name: influxdb
+        #     version: "1.12.1"

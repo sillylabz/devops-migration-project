@@ -1,0 +1,59 @@
+- name: Update Repo
+  apt:
+    update_cache: yes
+    state: latest
+
+- name: Add repo key
+  apt_key: 
+    url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+    state: present
+
+- name: Add repo key
+  block:
+    - name: Get jenkins repo apt key 
+      get_url:
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+        dest: /usr/share/keyrings/jenkins.asc
+
+    - name: Add Debian package repository
+      apt_repository:
+        repo: "deb [signed-by=/usr/share/keyrings/jenkins.asc] http://pkg.jenkins.io/debian-stable binary/"
+        state: present
+
+- name: Update Repo
+  apt:
+    update_cache: yes
+    state: latest
+
+- name: Install java jdk 11
+  apt: 
+    name: openjdk-11-jdk
+    state: present
+
+- name: Install Jenkins
+  apt: 
+    name: jenkins
+    state: present
+
+- name: Start jenkins service
+  systemd:
+    name: jenkins
+    state: started
+  
+- name: Enable jenkins service on server reboot
+  systemd:
+    name: jenkins
+    enabled: yes
+
+- wait_for: 
+    timeout: 90
+  delegate_to: localhost
+
+- name: jenkins init password
+  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
+  changed_when: false
+  register: result
+
+- debug:
+    var: result.stdout
+    
