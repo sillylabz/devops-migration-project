@@ -1,6 +1,6 @@
 
 module "app-server1" {
-  source = "/home/hernanku/local-projects/infra-devops/terraform/vmware/vsphere/single-vm-cloud"
+  source = "git::https://github.com/hernanku/infra-devops.git//terraform/vmware/vsphere/single-vm-cloud"
   vsphere_server_url = "10.23.1.11"
   vsphere_user       = "administrator@vsphere.local"
   vsphere_password   = var.vsphere_password

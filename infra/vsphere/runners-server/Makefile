@@ -1,8 +1,7 @@
 vsphere_password ?= "vsphere-password"
 
 init:
-	terraform init -reconfigure
-
+	terraform init
 plan:
 	TF_VAR_vsphere_password=$(vsphere_password) terraform plan
 
