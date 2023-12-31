@@ -1,26 +1,22 @@
-terraform {
-  backend "local" {}
-}
 
-
-module "vm" {
+module "eksa-control-server" {
   source = "git::https://github.com/hernanku/infra-devops.git//terraform/vmware/vsphere/single-vm-cloud"
-  vsphere_server_url = "10.0.0.31"
+  vsphere_server_url = "10.23.1.11"
   vsphere_user       = "administrator@vsphere.local"
-  vsphere_password   = ""
+  vsphere_password   = var.vsphere_password
   vsphere_datacenter = "dc-east"
-  vsphere_cluster    = "dev-cluster"
+  vsphere_cluster    = "lab-cluster"
   vm_datastore = "vmData"
-  vm_name            = "eksa-control"
+  vm_name            = "eksa-control-server"
   vm_disk_size = 50
+  vm_dns_search_domain = "labz.io"
   vm_domain = "labz.io"
-  vm_ipv4_address = "10.0.0.32"
-  vm_gateway = "10.0.0.1"
-  vm_dns_server = "10.0.0.33"
-  // vm_count = 1
+  vm_ipv4_address = "10.23.1.24"
+  vm_gateway = "10.23.1.1"
   vm_network     = "vmPub"
-  vm_template    = "base-ubuntu22-templ"
+  vm_template    = "gold-templ-ubuntu22-cloudinit"
   vm_cpu         = 2
-  vm_memory      = 8192
-}
+  vm_memory      = 4096
+  vm_dns_server = "10.23.1.9"
 
+}

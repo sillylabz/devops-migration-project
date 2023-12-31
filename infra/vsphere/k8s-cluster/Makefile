@@ -1,19 +1,20 @@
-init:
-	terraform init -reconfigure
+vsphere_password ?= "vsphere-password"
 
+init:
+	terraform init
 plan:
-	terraform plan
+	TF_VAR_vsphere_password=$(vsphere_password) terraform plan
 
 apply:
-	terraform apply -auto-approve
+	TF_VAR_vsphere_password=$(vsphere_password) terraform apply -auto-approve
 
 destroy:
-	terraform destroy -auto-approve
+	TF_VAR_vsphere_password=$(vsphere_password) terraform destroy -auto-approve
 
 fmt:
 	terraform fmt
 
 validate:
-	terraform validate
+	TF_VAR_vsphere_password=$(vsphere_password) terraform validate
 
 
