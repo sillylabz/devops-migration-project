@@ -7,11 +7,11 @@ module "sql-dbs-server" {
   vsphere_datacenter   = "dc-east"
   vsphere_cluster      = "lab-cluster"
   vm_datastore         = "vmData"
-  vm_name              = "sql-dbs-server"
+  vm_name              = "lsqldbs"
   vm_disk_size         = 100
   vm_dns_search_domain = "networksettings.com"
   vm_domain            = "networksettings.com"
-  vm_ipv4_address      = "10.97.23.53"
+  vm_ipv4_address      = "10.97.23.14"
   vm_gateway           = "10.97.23.1"
   vm_network           = "vmPub"
   vm_template          = "gold-templ-ubuntu22-cloudinit"
