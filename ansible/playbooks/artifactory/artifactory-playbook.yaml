@@ -1,24 +1,55 @@
 ---
-- name: Install nexus repo on Centos
-  hosts: localhost
-  connection: local
-  become: yes
-
-  # pre_tasks:
-  #   - name: Install package dependencies.
-  #     package:
-  #       name: "{{ item }}"
-  #       state: "present"
-  #     with_items:
-  #       - unzip
-  #       - rsync
-  
+- hosts: postgres_servers
   collections:
-    - jfrog.platform
+    - community.postgresql
     - community.general
+    - jfrog.platform
+  vars_files:
+    - ./vars.yml
+  roles:
+    - role: postgres
+      when: postgres_enabled | bool
 
+- hosts: artifactory_servers
+  collections:
+    - community.general
+    - jfrog.platform
+  vars_files:
+    - ./vars.yml
+  serial:
+    - 1
+    - 100%
   roles:
     - role: artifactory
-      vars: 
-        artifactory_enabled: true
-        xray_enabled: true
+      when: artifactory_enabled | bool
+
+- hosts: xray_servers
+  collections:
+    - community.general
+    - jfrog.platform
+  vars_files:
+    - ./vars.yml
+  roles:
+    - role: xray
+      when: xray_enabled | bool
+
+- hosts: distribution_servers
+  collections:
+    - community.general
+    - jfrog.platform
+  vars_files:
+    - ./vars.yml
+  roles:
+    - role: distribution
+      when: distribution_enabled | bool
+
+- hosts: insight_servers
+  collections:
+    - community.general
+    - ansible.posix
+    - jfrog.platform
+  vars_files:
+    - ./vars.yml
+  roles:
+    - role: insight
+      when: insight_enabled | bool

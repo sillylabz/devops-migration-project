@@ -1,4 +1,6 @@
 collections:
-  - name: ns.coll
-
+  - name: jfrog.platform
+  - name: community.general
+  - name: community.postgresql
+  - name: ansible.posix
 
